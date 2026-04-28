@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Mesbg dice calculator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <h1>Mesbg dice calculator</h1>
+      </header>
+
+      <section class="layout">
+        <form id="calculator-form" class="panel-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>You</h2>
+            </div>
+
+            <label>
+              Dice
+              <select name="attackerDice" data-range-start="1" data-range-end="20" data-placeholder="Choose dice"></select>
+            </label>
+
+            <label>
+              Fv
+              <select name="attackerFight" data-range-start="1" data-range-end="10" data-placeholder="Choose Fv"></select>
+            </label>
+
+            <label>
+              To wound
+              <select name="attackerToWound">
+                <option value="" selected disabled>Choose roll</option>
+                <option value="3+">3+</option>
+                <option value="4+">4+</option>
+                <option value="5+">5+</option>
+                <option value="6+">6+</option>
+                <option value="6/4">6 then 4+</option>
+                <option value="6/5">6 then 5+</option>
+                <option value="6/6">6 then 6</option>
+                <option value="-">Impossible</option>
+              </select>
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" name="attackerSecondaryEnabled" />
+              <span>Add second wound roll</span>
+            </label>
+
+            <div class="split-wound-row is-disabled" data-split-row="attacker">
+              <label>
+                Extra to wound
+                <select name="attackerSecondaryToWound" disabled>
+                  <option value="" selected disabled>Choose roll</option>
+                  <option value="3+">3+</option>
+                  <option value="4+">4+</option>
+                  <option value="5+">5+</option>
+                  <option value="6+">6+</option>
+                  <option value="6/4">6 then 4+</option>
+                  <option value="6/5">6 then 5+</option>
+                  <option value="6/6">6 then 6</option>
+                  <option value="-">Impossible</option>
+                </select>
+              </label>
+
+              <label>
+                Dice
+                <select
+                  name="attackerSecondaryDice"
+                  data-range-start="0"
+                  data-range-end="20"
+                  data-placeholder="Dice"
+                  disabled
+                ></select>
+              </label>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" name="attackerElvenMade" />
+              <span>Elven-made weapon</span>
+            </label>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Opponent</h2>
+            </div>
+
+            <label>
+              Dice
+              <select name="defenderDice" data-range-start="1" data-range-end="20" data-placeholder="Choose dice"></select>
+            </label>
+
+            <label>
+              Fv
+              <select name="defenderFight" data-range-start="1" data-range-end="10" data-placeholder="Choose Fv"></select>
+            </label>
+
+            <label>
+              To wound
+              <select name="defenderToWound">
+                <option value="" selected disabled>Choose roll</option>
+                <option value="3+">3+</option>
+                <option value="4+">4+</option>
+                <option value="5+">5+</option>
+                <option value="6+">6+</option>
+                <option value="6/4">6 then 4+</option>
+                <option value="6/5">6 then 5+</option>
+                <option value="6/6">6 then 6</option>
+                <option value="-">Impossible</option>
+              </select>
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" name="defenderSecondaryEnabled" />
+              <span>Add second wound roll</span>
+            </label>
+
+            <div class="split-wound-row is-disabled" data-split-row="defender">
+              <label>
+                Extra to wound
+                <select name="defenderSecondaryToWound" disabled>
+                  <option value="" selected disabled>Choose roll</option>
+                  <option value="3+">3+</option>
+                  <option value="4+">4+</option>
+                  <option value="5+">5+</option>
+                  <option value="6+">6+</option>
+                  <option value="6/4">6 then 4+</option>
+                  <option value="6/5">6 then 5+</option>
+                  <option value="6/6">6 then 6</option>
+                  <option value="-">Impossible</option>
+                </select>
+              </label>
+
+              <label>
+                Dice
+                <select
+                  name="defenderSecondaryDice"
+                  data-range-start="0"
+                  data-range-end="20"
+                  data-placeholder="Dice"
+                  disabled
+                ></select>
+              </label>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" name="defenderElvenMade" />
+              <span>Elven-made weapon</span>
+            </label>
+          </section>
+        </form>
+
+        <section class="panel results-panel">
+          <div class="panel-heading">
+            <h2>Results</h2>
+            <p>Live percentages update as you change the values.</p>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-card">
+              <h3>You</h3>
+              <dl id="attacker-summary" class="stat-list"></dl>
+              <div id="attacker-distribution" class="distribution"></div>
+            </article>
+
+            <article class="result-card">
+              <h3>Opponent</h3>
+              <dl id="defender-summary" class="stat-list"></dl>
+              <div id="defender-distribution" class="distribution"></div>
+            </article>
+          </div>
+
+          <div class="notes">
+            <p id="duel-note"></p>
+            <p id="wound-note"></p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./calculator.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
