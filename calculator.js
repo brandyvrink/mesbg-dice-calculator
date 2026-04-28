@@ -158,11 +158,13 @@
       woundRoll: input.attackerToWound || "-",
       secondaryEnabled: Boolean(input.attackerSecondaryEnabled),
       secondaryWoundRoll: input.attackerSecondaryToWound || "-",
-      secondaryDice: clampInt(input.attackerSecondaryDice, 0, 20, 0),
+      secondaryDice: clampInt(input.attackerSecondaryDice, 0, 40, 0),
+      trapped: Boolean(input.attackerTrapped),
       elvenMade: Boolean(input.attackerElvenMade)
     };
-    attacker.secondaryDice = attacker.secondaryEnabled ? Math.min(attacker.dice, attacker.secondaryDice) : 0;
-    attacker.woundDice = attacker.dice - attacker.secondaryDice;
+    attacker.baseWoundDice = attacker.trapped ? attacker.dice * 2 : attacker.dice;
+    attacker.secondaryDice = attacker.secondaryEnabled ? Math.min(attacker.baseWoundDice, attacker.secondaryDice) : 0;
+    attacker.woundDice = attacker.baseWoundDice - attacker.secondaryDice;
 
     const defender = {
       dice: clampInt(input.defenderDice, 1, 20, 1),
@@ -170,11 +172,13 @@
       woundRoll: input.defenderToWound || "-",
       secondaryEnabled: Boolean(input.defenderSecondaryEnabled),
       secondaryWoundRoll: input.defenderSecondaryToWound || "-",
-      secondaryDice: clampInt(input.defenderSecondaryDice, 0, 20, 0),
+      secondaryDice: clampInt(input.defenderSecondaryDice, 0, 40, 0),
+      trapped: Boolean(input.defenderTrapped),
       elvenMade: Boolean(input.defenderElvenMade)
     };
-    defender.secondaryDice = defender.secondaryEnabled ? Math.min(defender.dice, defender.secondaryDice) : 0;
-    defender.woundDice = defender.dice - defender.secondaryDice;
+    defender.baseWoundDice = defender.trapped ? defender.dice * 2 : defender.dice;
+    defender.secondaryDice = defender.secondaryEnabled ? Math.min(defender.baseWoundDice, defender.secondaryDice) : 0;
+    defender.woundDice = defender.baseWoundDice - defender.secondaryDice;
 
     const duel = computeDuelOdds(attacker, defender);
 

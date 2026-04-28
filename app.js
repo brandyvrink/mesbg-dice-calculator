@@ -23,6 +23,7 @@
       attackerSecondaryEnabled: formData.get("attackerSecondaryEnabled") === "on",
       attackerSecondaryToWound: formData.get("attackerSecondaryToWound"),
       attackerSecondaryDice: formData.get("attackerSecondaryDice"),
+      attackerTrapped: formData.get("attackerTrapped") === "on",
       attackerElvenMade: formData.get("attackerElvenMade") === "on",
       defenderDice: formData.get("defenderDice"),
       defenderFight: formData.get("defenderFight"),
@@ -30,6 +31,7 @@
       defenderSecondaryEnabled: formData.get("defenderSecondaryEnabled") === "on",
       defenderSecondaryToWound: formData.get("defenderSecondaryToWound"),
       defenderSecondaryDice: formData.get("defenderSecondaryDice"),
+      defenderTrapped: formData.get("defenderTrapped") === "on",
       defenderElvenMade: formData.get("defenderElvenMade") === "on"
     };
   }
@@ -104,7 +106,7 @@
   }
 
   function woundNoteText(result) {
-    return `Main To wound uses the duel dice by default. If you add a second wound roll, those dice are taken away from the main wound roll.`;
+    return `Main To wound uses duel dice by default. Trapped doubles that side's wound dice before any split to a second wound roll.`;
   }
 
   function update() {
