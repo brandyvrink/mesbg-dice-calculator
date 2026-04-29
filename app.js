@@ -150,5 +150,6 @@
 
   populateRangeSelects();
   form.addEventListener("input", update);
+  form.addEventListener("change", update);
   update();
 })();
